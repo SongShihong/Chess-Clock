@@ -310,7 +310,8 @@ void CChessClockDlg::OnPaint()
 		HDC hDC = CreateCompatibleDC(real_hDC);
 		HBITMAP bmp = CreateCompatibleBitmap(real_hDC, rect.right - rect.left, rect.bottom - rect.top);
 		SelectObject(hDC, bmp);
-		FillRect(hDC, &rect, (HBRUSH)GetStockObject(WHITE_BRUSH));//用白色画笔填充
+		HBRUSH bru = CreateSolidBrush(RGB(240, 240, 240));
+		FillRect(hDC, &rect, bru);//用白色画笔填充
 #endif
 
 #define RED	RGB(255,0,0)
@@ -477,6 +478,7 @@ void CChessClockDlg::OnPaint()
 
 		BitBlt(real_hDC, 0, 0, rect.right - rect.left, rect.bottom - rect.top, hDC, 0, 0, SRCCOPY);
 		DeleteDC(hDC);
+		DeleteObject(bru);
 		DeleteObject(bmp);
 
 
@@ -537,7 +539,7 @@ void CChessClockDlg::OnBnClickedButton1()
 		edt4.SetReadOnly();
 		edt5.SetReadOnly();
 		edt6.SetReadOnly();
-		bt1.SetWindowTextW(TEXT("编辑"));
+		bt1.SetWindowTextW(TEXT("Edit"));
 		this->State = WAITING;
 	}
 	else if (this->State == WAITING || this->State == LENDED || this->State == RENDED)
@@ -548,7 +550,7 @@ void CChessClockDlg::OnBnClickedButton1()
 		edt4.SetReadOnly(FALSE);
 		edt5.SetReadOnly(FALSE);
 		edt6.SetReadOnly(FALSE);
-		bt1.SetWindowTextW(TEXT("保存"));
+		bt1.SetWindowTextW(TEXT("Save"));
 		this->State = EDITING;
 	}
 	Invalidate();
