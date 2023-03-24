@@ -727,7 +727,7 @@ BOOL CChessClockDlg::PreTranslateMessage(MSG* pMsg)
 				{
 					this->State = RRUNNING;
 				}
-				this->bt1.SetWindowTextW(TEXT("编辑"));
+				this->bt1.SetWindowTextW(TEXT("Edit"));
 				this->bt1.EnableWindow(FALSE);
 				this->SetFocus();
 				Invalidate();
